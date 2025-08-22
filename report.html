@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Session Report</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#007AFF',
+            secondary: '#34C759'
+          },
+          borderRadius: {
+            button: '8px'
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-gray-50">
+<div class="min-h-screen flex">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
+    <div class="p-6 border-b border-gray-200">
+      <span class="text-2xl font-['Pacifico']">logo</span>
+    </div>
+    <nav class="flex-1 p-4">
+      <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <i class="ri-home-line w-5 h-5 mr-3"></i>
+        <span>Check-In</span>
+      </a>
+      <a href="add_client.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <i class="ri-user-add-line w-5 h-5 mr-3"></i>
+        <span>Add Client</span>
+      </a>
+      <a href="trainer.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <i class="ri-team-line w-5 h-5 mr-3"></i>
+        <span>Trainers</span>
+      </a>
+      <a href="report.html" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg">
+        <i class="ri-file-chart-line w-5 h-5 mr-3"></i>
+        <span>Reports</span>
+      </a>
+    </nav>
+    <div class="p-4 border-t border-gray-200">
+      <div class="flex items-center">
+        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+          <i class="ri-user-line text-gray-600"></i>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm font-medium">Admin User</p>
+          <p class="text-xs text-gray-500">admin@studio.com</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-2xl font-semibold text-gray-800">Session Report</h1>
+      <div class="text-sm text-gray-500">
+        <span id="todayDate"></span>
+      </div>
+    </div>
+
+    <div class="w-full max-w-5xl bg-white shadow rounded-2xl p-8 space-y-6">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Session Log (select time frame)</label>
+          <select id="logRange" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+            <option value="7">Last 7 Days</option>
+            <option value="30">Last 30 Days</option>
+            <option value="custom">Custom Date Range</option>
+          </select>
+        </div>
+
+        <!-- Custom Date Range -->
+        <div id="customRange" class="grid grid-cols-2 gap-4 hidden">
+          <div>
+            <label class="block text-sm font-medium mb-1">Start Date</label>
+            <input type="date" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">End Date</label>
+            <input type="date" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+        </div>
+
+        <!-- Add Session Button -->
+        <div>
+          <button id="addSessionBtn" class="bg-primary text-white px-4 py-2 rounded-lg text-sm">
+            <i class="ri-add-line mr-1"></i> Add Session
+          </button>
+        </div>
+
+        <!-- Log Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th class="px-4 py-2 border">Date</th>
+                <th class="px-4 py-2 border">Trainer</th>
+                <th class="px-4 py-2 border">Client</th>
+                <th class="px-4 py-2 border">Session Type</th>
+                <th class="px-4 py-2 border">Duration</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-700">
+              <tr>
+                <td class="px-4 py-2 border">2025-06-21</td>
+                <td class="px-4 py-2 border">John Trainer</td>
+                <td class="px-4 py-2 border">Emily R.</td>
+                <td class="px-4 py-2 border">Yoga</td>
+                <td class="px-4 py-2 border">45 mins</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Session Modal -->
+    <div id="sessionModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-2xl w-full max-w-md p-6 space-y-4 shadow-xl">
+        <h2 class="text-lg font-semibold text-gray-800">Add New Session</h2>
+        <div>
+          <label class="block text-sm font-medium mb-1">Trainer</label>
+          <select class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+            <option>John Trainer</option>
+            <option>Emily Coach</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Client</label>
+          <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" placeholder="Client Name"/>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Session Type</label>
+          <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Date</label>
+          <input type="date" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"/>
+        </div>
+        <div class="flex justify-end gap-2">
+          <button onclick="closeModal()" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg text-sm">Cancel</button>
+          <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm">Save</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', {
+    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+  });
+
+  const logRange = document.getElementById('logRange');
+  const customRange = document.getElementById('customRange');
+  logRange.addEventListener('change', () => {
+    customRange.classList.toggle('hidden', logRange.value !== 'custom');
+  });
+
+  const modal = document.getElementById('sessionModal');
+  document.getElementById('addSessionBtn').addEventListener('click', () => {
+    modal.classList.remove('hidden');
+  });
+
+  function closeModal() {
+    modal.classList.add('hidden');
+  }
+</script>
+</body>
+</html>

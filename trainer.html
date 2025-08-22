@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Client Details</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#007AFF',
+            secondary: '#34C759'
+          },
+          borderRadius: {
+            button: '8px'
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-gray-50">
+<div class="min-h-screen flex">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
+    <div class="p-6 border-b border-gray-200">
+      <span class="text-2xl font-['Pacifico']">logo</span>
+    </div>
+    <nav class="flex-1 p-4">
+      <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <i class="ri-home-line w-5 h-5 mr-3"></i>
+        <span>Check-In</span>
+      </a>
+      <a href="add clinet.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <i class="ri-user-add-line w-5 h-5 mr-3"></i>
+        <span>Add Client</span>
+      </a>
+      <a href="trainer.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <i class="ri-team-line w-5 h-5 mr-3"></i>
+        <span>Trainers</span>
+      </a>
+      <a href="report.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <i class="ri-file-chart-line w-5 h-5 mr-3"></i>
+        <span>Reports</span>
+      </a>
+      <a href="detail.html" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg">
+        <i class="ri-user-search-line w-5 h-5 mr-3"></i>
+        <span>Client Details</span>
+      </a>
+    </nav>
+    <div class="p-4 border-t border-gray-200">
+      <div class="flex items-center">
+        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+          <i class="ri-user-line text-gray-600"></i>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm font-medium">Admin User</p>
+          <p class="text-xs text-gray-500">admin@studio.com</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-2xl font-semibold text-gray-800">Client Details</h1>
+      <div class="text-sm text-gray-500">
+        <span id="todayDate"></span>
+      </div>
+    </div>
+
+    <div class="w-full max-w-4xl bg-white shadow rounded-2xl p-8 space-y-6">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Client Name</label>
+          <input type="text" list="clientList" placeholder="Search Client..." class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"/>
+          <datalist id="clientList">
+            <option value="John Doe" />
+            <option value="Jane Smith" />
+          </datalist>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">Name of Client</label>
+          <input type="text" id="clientName" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"/>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">Session Type</label>
+            <input type="text" id="sessionType" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Sessions Left</label>
+            <input type="number" id="sessionsLeft" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"/>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <button id="adjustBtn" class="bg-primary text-white px-4 py-2 rounded-lg text-sm">Adjust Sessions</button>
+          <button id="rechargeBtn" class="bg-secondary text-white px-4 py-2 rounded-lg text-sm">Recharge Sessions</button>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">Notes</label>
+          <textarea rows="3" id="notes" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" placeholder="Add any notes..."></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">Sessions to Add</label>
+            <input type="number" id="sessionsAdd" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Sessions to Subtract</label>
+            <input type="number" id="sessionsSubtract" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"/>
+          </div>
+        </div>
+
+        <div class="flex justify-between gap-4 mt-4">
+          <button id="saveBtn" class="bg-primary text-white px-4 py-2 rounded-lg text-sm w-full">Save Changes</button>
+          <button id="deleteBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm w-full">Delete Client</button>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">Client Log (select time frame)</label>
+          <select class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+            <option>Last 7 Days</option>
+            <option>Last 30 Days</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', {
+    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+  });
+
+  document.getElementById('adjustBtn').addEventListener('click', () => {
+    const add = parseInt(document.getElementById('sessionsAdd').value || '0');
+    const subtract = parseInt(document.getElementById('sessionsSubtract').value || '0');
+    const current = parseInt(document.getElementById('sessionsLeft').value || '0');
+    document.getElementById('sessionsLeft').value = current + add - subtract;
+  });
+
+  document.getElementById('rechargeBtn').addEventListener('click', () => {
+    const recharge = parseInt(prompt("Enter sessions to recharge:"));
+    const current = parseInt(document.getElementById('sessionsLeft').value || '0');
+    if (!isNaN(recharge)) {
+      document.getElementById('sessionsLeft').value = current + recharge;
+    }
+  });
+
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    alert("Changes saved successfully.");
+    // Logic to save data can go here
+  });
+
+  document.getElementById('deleteBtn').addEventListener('click', () => {
+    if (confirm("Are you sure you want to delete this client?")) {
+      alert("Client deleted.");
+      // Logic to delete client goes here
+    }
+  });
+</script>
+</body>
+</html>

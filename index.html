@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Studio Management</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#007AFF',
+            secondary: '#34C759'
+          },
+          borderRadius: {
+            'button': '8px'
+          },
+          fontFamily: {
+            pacifico: ['Pacifico', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc; transition: .4s; border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 18px; width: 18px;
+      left: 4px; bottom: 4px; background-color: white; transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #007AFF; }
+    input:checked + .slider:before { transform: translateX(24px); }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
+      <div class="p-6 border-b border-gray-200">
+        <span class="text-2xl font-pacifico text-primary">Studio</span>
+      </div>
+      <nav class="flex-1 p-4">
+        <a href="#" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg mb-2">
+          <i class="ri-home-line mr-3"></i> <span>Check-In</span>
+        </a>
+        <a href="add clinet.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+          <i class="ri-user-add-line mr-3"></i> <span>Add Client</span>
+        </a>
+        <a href="trainer.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+          <i class="ri-team-line mr-3"></i> <span>Trainers</span>
+        </a>
+        <a href="report.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+          <i class="ri-file-chart-line mr-3"></i> <span>Reports</span>
+        </a>
+        <a href="detail.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg">
+          <i class="ri-user-search-line mr-3"></i> <span>Client Details</span>
+        </a>
+      </nav>
+      <div class="p-4 border-t border-gray-200">
+        <div class="flex items-center">
+          <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+            <i class="ri-user-line text-gray-600"></i>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm font-medium">Admin User</p>
+            <p class="text-xs text-gray-500">admin@studio.com</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 p-8 overflow-y-auto">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-semibold">Client Check-In</h1>
+        <p class="text-sm text-gray-500">June 24, 2025 • Tuesday</p>
+      </div>
+
+      <!-- Search Clients -->
+      <div class="bg-white p-6 rounded-lg shadow mb-6">
+        <label for="clientSearch" class="block text-sm font-medium mb-2">Client Name</label>
+        <input type="text" id="clientSearch" class="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Start typing client name...">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Client Info -->
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h2 class="text-lg font-medium mb-4">Client Info</h2>
+          <div class="space-y-3">
+            <p><strong>Name:</strong> Emily Thompson</p>
+            <p><strong>Email:</strong> emily.thompson@email.com</p>
+            <p><strong>Phone:</strong> (555) 123-4567</p>
+            <p><strong>Sessions Left:</strong> 1</p>
+          </div>
+        </div>
+
+        <!-- Check-In Form -->
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h2 class="text-lg font-medium mb-4">Check-In</h2>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm mb-1">Trainer Name</label>
+              <select class="w-full px-4 py-2 border rounded-lg text-sm">
+                <option>Select Trainer</option>
+                <option>Michael Chen</option>
+                <option>Jessica Lee</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm mb-1">Session Type</label>
+              <select id="sessionType" class="w-full px-4 py-2 border rounded-lg text-sm">
+                <option>Select Type</option>
+                <option value="single">Single</option>
+                <option value="partner">Partnered Session</option>
+              </select>
+            </div>
+            <div id="partnerInput" class="hidden">
+              <label class="block text-sm mb-1">Partner Name</label>
+              <input type="text" class="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Start typing partner name...">
+            </div>
+            <div id="alertBox" class="hidden mt-4 p-3 rounded text-sm font-medium"></div>
+            <button onclick="handleCheckIn()" class="w-full bg-primary text-white py-2 rounded-lg text-sm">Check In</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const sessionType = document.getElementById('sessionType');
+    const partnerInput = document.getElementById('partnerInput');
+    const alertBox = document.getElementById('alertBox');
+
+    sessionType.addEventListener('change', function () {
+      partnerInput.classList.toggle('hidden', this.value !== 'partner');
+    });
+
+    function showAlert(type, message) {
+      alertBox.className = 'mt-4 p-3 rounded text-sm font-medium';
+      alertBox.classList.remove('hidden');
+      alertBox.textContent = message;
+
+      switch(type) {
+        case 'success':
+          alertBox.classList.add('bg-green-100', 'text-green-800');
+          break;
+        case 'warning':
+          alertBox.classList.add('bg-pink-100', 'text-pink-800');
+          break;
+        case 'error':
+          alertBox.classList.add('bg-red-100', 'text-red-800');
+          break;
+      }
+    }
+
+    function handleCheckIn() {
+      // Replace this logic with real session count check
+      const sessionsLeft = 1;
+      const hasSessionType = true;
+
+      if (!hasSessionType) {
+        showAlert('error', 'Client does not have this session type');
+      } else if (sessionsLeft === 0) {
+        showAlert('error', 'Client does not have any sessions left! Cannot be checked in!');
+      } else {
+        showAlert('success', 'Successful Check In');
+        if (sessionsLeft === 1) {
+          showAlert('warning', 'Today is this client’s last Session!');
+        } else if (sessionsLeft === 2) {
+          showAlert('warning', 'Client only has 1 session left!');
+        }
+      }
+    }
+  </script>
+</body>
+</html>

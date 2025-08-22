@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fitness Studio Management</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#007AFF',
+            secondary: '#34C759'
+          },
+          borderRadius: {
+            button: '8px'
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-gray-50">
+<div class="min-h-screen flex">
+  <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
+    <div class="p-6 border-b border-gray-200">
+      <span class="text-2xl font-['Pacifico']">logo</span>
+    </div>
+    <nav class="flex-1 p-4">
+      <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <div class="w-5 h-5 flex items-center justify-center mr-3">
+          <i class="ri-home-line"></i>
+        </div>
+        <span>Check-In</span>
+      </a>
+      <a href="add clinet.html" class="flex items-center px-4 py-3 text-primary bg-blue-50 rounded-lg mb-2">
+        <div class="w-5 h-5 flex items-center justify-center mr-3">
+          <i class="ri-user-add-line"></i>
+        </div>
+        <span>Add Client</span>
+      </a>
+      <a href="trainer.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <div class="w-5 h-5 flex items-center justify-center mr-3">
+          <i class="ri-team-line"></i>
+        </div>
+        <span>Trainers</span>
+      </a>
+      <a href="report.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg mb-2">
+        <div class="w-5 h-5 flex items-center justify-center mr-3">
+          <i class="ri-file-chart-line"></i>
+        </div>
+        <span>Reports</span>
+      </a>
+      <a href="detail.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg">
+        <div class="w-5 h-5 flex items-center justify-center mr-3">
+          <i class="ri-user-search-line"></i>
+        </div>
+        <span>Client Details</span>
+      </a>
+    </nav>
+    <div class="p-4 border-t border-gray-200">
+      <div class="flex items-center">
+        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+          <i class="ri-user-line text-gray-600"></i>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm font-medium">Admin User</p>
+          <p class="text-xs text-gray-500">admin@studio.com</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="flex-1 overflow-y-auto">
+    <div class="p-8">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-semibold">Add Client</h1>
+        <div class="text-sm text-gray-500">
+          <span>June 24, 2025</span>
+          <span class="mx-2">•</span>
+          <span>Tuesday</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow-sm p-6">
+          <h2 class="text-lg font-medium mb-4">Client Information</h2>
+          <div class="space-y-4 text-sm text-gray-700">
+            <div class="flex justify-between py-2 border-b">
+              <span>Name</span>
+              <span id="previewName" class="font-medium text-gray-900">—</span>
+            </div>
+            <div class="flex justify-between py-2 border-b">
+              <span>Email</span>
+              <span id="previewEmail">—</span>
+            </div>
+            <div class="flex justify-between py-2 border-b">
+              <span>Phone</span>
+              <span id="previewPhone">—</span>
+            </div>
+            <div class="flex justify-between py-2">
+              <span>Sessions</span>
+              <span id="previewSessions" class="text-primary font-medium">—</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="addClientForm" class="bg-white rounded-lg shadow-sm p-6 space-y-5">
+          <h2 class="text-lg font-medium mb-4">Add Client Details</h2>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">First Name</label>
+              <input id="clientFirstName" type="text" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="First Name" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Last Name</label>
+              <input id="clientLastName" type="text" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="Last Name" required />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Email</label>
+            <input id="clientEmail" type="email" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="Email Address" required />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Phone</label>
+            <input id="clientPhone" type="tel" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="Phone Number" required />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Session Type</label>
+            <select id="sessionType" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" required>
+              <option value="">Select...</option>
+              <option value="Single">Single</option>
+              <option value="Partnered">Partnered</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Starting Sessions</label>
+            <input id="clientSessions" type="number" min="1" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="Number of Sessions" value="1" required />
+          </div>
+
+          <div id="partnerFields" class="hidden border-t pt-4">
+            <h3 class="text-md font-semibold mb-2">Partner Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">Partner First Name</label>
+                <input id="partnerFirstName" type="text" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="First Name" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">Partner Last Name</label>
+                <input id="partnerLastName" type="text" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="Last Name" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1 mt-2">Partner Email</label>
+              <input id="partnerEmail" type="email" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="Email Address" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Partner Phone</label>
+              <input id="partnerPhone" type="tel" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="Phone Number" />
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-primary text-white py-2 px-4 rounded-lg text-sm font-medium">
+            Save Client
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  const partnerFields = document.getElementById('partnerFields');
+  document.getElementById('sessionType').addEventListener('change', function () {
+    partnerFields.classList.toggle('hidden', this.value !== 'Partnered');
+  });
+
+  document.getElementById('addClientForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const now = new Date();
+    const client = {
+      firstName: document.getElementById('clientFirstName').value.trim(),
+      lastName: document.getElementById('clientLastName').value.trim(),
+      email: document.getElementById('clientEmail').value.trim(),
+      phone: document.getElementById('clientPhone').value.trim(),
+      sessionType: document.getElementById('sessionType').value,
+      sessionsRemaining: parseInt(document.getElementById('clientSessions').value.trim(), 10),
+      dateAdded: now.toISOString(),
+      partner: null
+    };
+
+    if (client.sessionType === 'Partnered') {
+      client.partner = {
+        firstName: document.getElementById('partnerFirstName').value.trim(),
+        lastName: document.getElementById('partnerLastName').value.trim(),
+        email: document.getElementById('partnerEmail').value.trim(),
+        phone: document.getElementById('partnerPhone').value.trim()
+      };
+    }
+
+    document.getElementById('previewName').textContent = `${client.firstName} ${client.lastName}`;
+    document.getElementById('previewEmail').textContent = client.email;
+    document.getElementById('previewPhone').textContent = client.phone;
+    document.getElementById('previewSessions').textContent = `${client.sessionsRemaining} sessions`;
+
+    const clients = JSON.parse(localStorage.getItem('clients') || '[]');
+    clients.push(client);
+    localStorage.setItem('clients', JSON.stringify(clients));
+
+    alert('Client added successfully!');
+    this.reset();
+    partnerFields.classList.add('hidden');
+  });
+</script>
+</body>
+</html>
